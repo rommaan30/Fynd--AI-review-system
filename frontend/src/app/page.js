@@ -22,10 +22,10 @@ export default function Home() {
 
       if (!res.ok) throw new Error("Submission failed");
 
-      setMessage("✅ Review submitted successfully");
+      setMessage(" Review submitted successfully");
       setReview("");
     } catch (err) {
-      setMessage("❌ Failed to submit review");
+      setMessage("Failed to submit review");
     }
   };
 
