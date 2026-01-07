@@ -1,35 +1,18 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 
-from database import Base, engine
-from routes import reviews
+app = FastAPI()
 
-Base.metadata.create_all(bind=engine)
-
-app = FastAPI(
-    title="AI Review Backend",
-    version="1.0"
-)
-
-
-# ✅ CORS CONFIG (THIS FIXES YOUR ERROR)
+# ✅ Hard CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000", 
-        # Next.js dev
-    ],
+    allow_origins=["*"],  # allow all origins for demo
     allow_credentials=True,
-    allow_methods=["*"],  # POST, GET, OPTIONS, etc.
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.get("/")
-def health_check():
-    return {
-        "status": "ok",
-        "service": "backend running",
-        "docs": "/docs"
-    }
-
-app.include_router(reviews.router)
+# ✅ Force OPTIONS handling for ALL routes
+@app.options("/{full_path:path}")
+async def options_handler(full_path: str):
+    return Response(status_code=200)
