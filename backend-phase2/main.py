@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
+from database import Base, engine
+import models
 
 # ✅ IMPORT YOUR ROUTER
 from routes.reviews import router as review_router  # adjust filename if different
@@ -25,5 +27,7 @@ async def options_handler(path: str):
 def health():
     return {"status": "ok"}
 
+# ✅ Create tables automatically on startup
+Base.metadata.create_all(bind=engine)
 # ✅ REGISTER ROUTES
 app.include_router(review_router)
