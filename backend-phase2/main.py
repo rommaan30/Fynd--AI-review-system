@@ -11,12 +11,19 @@ app = FastAPI(
     version="1.0"
 )
 
+@app.get("/")
+def health_check():
+    return {
+        "status": "ok",
+        "service": "backend running",
+        "docs": "/docs"
+    }
 # ✅ CORS CONFIG (THIS FIXES YOUR ERROR)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000", 
-        "https://fynd-ai-review-system-78hp.vercel.app/"# Next.js dev
+        # Next.js dev
     ],
     allow_credentials=True,
     allow_methods=["*"],  # POST, GET, OPTIONS, etc.
