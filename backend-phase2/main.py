@@ -15,7 +15,8 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",  # Next.js dev
+        "http://localhost:3000", 
+        "https://fynd-ai-review-system-78hp.vercel.app/"# Next.js dev
     ],
     allow_credentials=True,
     allow_methods=["*"],  # POST, GET, OPTIONS, etc.
