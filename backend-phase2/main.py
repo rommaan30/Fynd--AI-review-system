@@ -11,13 +11,7 @@ app = FastAPI(
     version="1.0"
 )
 
-@app.get("/")
-def health_check():
-    return {
-        "status": "ok",
-        "service": "backend running",
-        "docs": "/docs"
-    }
+
 # ✅ CORS CONFIG (THIS FIXES YOUR ERROR)
 app.add_middleware(
     CORSMiddleware,
@@ -29,5 +23,13 @@ app.add_middleware(
     allow_methods=["*"],  # POST, GET, OPTIONS, etc.
     allow_headers=["*"],
 )
+
+@app.get("/")
+def health_check():
+    return {
+        "status": "ok",
+        "service": "backend running",
+        "docs": "/docs"
+    }
 
 app.include_router(reviews.router)
