@@ -2,7 +2,7 @@ from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 # ✅ IMPORT YOUR ROUTER
-from routes import reviews as review_router   # adjust filename if different
+from routes.reviews import router as review_router  # adjust filename if different
 
 app = FastAPI()
 
